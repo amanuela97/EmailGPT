@@ -6,22 +6,52 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --duration: 0.5s;
+  --stagger: 0.25s;
+  --interval: calc(var(--duration) - var(--stagger));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.container {
+  background: transparent;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.2em;
+  display: flex;
+  justify-content: center;
+  gap: 0.2em;
+}
+
+.circle {
+  margin: 0;
+  position: relative;
+  width: 10px;
+  aspect-ratio: 1/1;
+  background: #15803d;
+  border-radius: 100%;
+  animation: slideup var(--duration) calc(var(--interval) * var(--i)) infinite
+    alternate;
+}
+
+@keyframes slideup {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-100%);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.result {
+  animation: slidein calc(var(--duration)) calc(var(--interval) * var(--idx))
+    both ease-in-out;
+}
+
+@keyframes slidein {
+  from {
+    opacity: 0;
+    transform: scale(0.2) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+  }
 }
