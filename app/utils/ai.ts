@@ -19,11 +19,10 @@ const getPrompt = async (content: string, length: number) => {
 
   const prompt = new PromptTemplate({
     template: `Follow the instructions below! 
-    1. Generate ${length} different messages, no matter what!. 
+    1. Generate exactly ${length} different messages, no matter what!. 
     2. Make sure each message are different, no matter what!. 
-    3. Format your response to match the format instructions, no matter what!\n{format_instructions}\n
-    
-    message: {message}
+    3. Format your response to match the format instructions, no matter what!\n{format_instructions}
+    \nmessage: {message}
     `,
     inputVariables: ['message'],
     partialVariables: { format_instructions },
