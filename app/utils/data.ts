@@ -35,3 +35,28 @@ export const validateEmail = (email: string) => {
     return message;
   }
 };
+
+export const emailGeneratorFunctionSchema = {
+  name: 'generate_emails',
+  description:
+    'paraphrases and generates new text from the input text message.',
+  parameters: {
+    type: 'object',
+    properties: {
+      messages: {
+        type: 'array',
+        description: 'An array containing the paraphrased text messages',
+        items: {
+          type: 'object',
+          properties: {
+            message: {
+              type: 'string',
+              description: 'The paraphrased text message',
+            },
+          },
+        },
+      },
+    },
+  },
+  required: ['messages', 'message'],
+};

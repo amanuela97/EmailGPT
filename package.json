@@ -17,7 +17,6 @@
     "encoding": "0.1.13",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
-    "langchain": "0.0.143",
     "next": "13.4.19",
     "openai": "4.4.0",
     "postcss": "8.4.28",

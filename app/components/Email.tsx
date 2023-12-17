@@ -15,7 +15,7 @@ import {
 import { MultiValue } from 'react-select';
 import { Email, Name } from '../utils/types';
 import CustomInput from './CustomInput';
-import { analyze } from '../utils/ai';
+import { generateEmails } from '../utils/emailGenerator';
 
 const Email = () => {
   const emailOptions = useAppSelector((state) => state.emailOptions);
@@ -65,10 +65,20 @@ const Email = () => {
         })
       );
     }
+
     dispatch(updateLoadingState({ loading: true }));
     const names = selectedNames.map((email) => email.value);
-    const response = await analyze(content, names, selectedEmails.length);
-    dispatch(addResponse({ messages: response }));
+    const result = await generateEmails(content, names, selectedEmails.length);
+
+    if (result?.data) {
+      dispatch(addResponse({ messages: result.data }));
+    } else if (result.error) {
+      dispatch(
+        setErrorMessage({
+          message: 'Unable to generate emails :(',
+        })
+      );
+    }
     dispatch(updateLoadingState({ loading: false }));
   };
 
