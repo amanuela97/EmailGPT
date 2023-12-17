@@ -10,7 +10,6 @@ export const generateEmails = async (
   );
 
   if (!res.ok) {
-    console.error(res.status, res.statusText);
     return {
       error: res.statusText,
     };
@@ -19,5 +18,6 @@ export const generateEmails = async (
   const result: {
     message: string;
   }[] = await res.json();
+
   return { data: result };
 };

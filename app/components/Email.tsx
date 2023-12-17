@@ -68,14 +68,17 @@ const Email = () => {
 
     dispatch(updateLoadingState({ loading: true }));
     const names = selectedNames.map((email) => email.value);
-    const result = await generateEmails(content, names, selectedEmails.length);
-
-    if (result?.data) {
-      dispatch(addResponse({ messages: result.data }));
-    } else if (result.error) {
+    const { data, error } = await generateEmails(
+      content,
+      names,
+      selectedEmails.length
+    );
+    if (data) {
+      dispatch(addResponse({ messages: data }));
+    } else if (error) {
       dispatch(
         setErrorMessage({
-          message: 'Unable to generate emails :(',
+          message: error,
         })
       );
     }
@@ -84,6 +87,9 @@ const Email = () => {
 
   return (
     <div className="col-span-2 px-4 py-2">
+      <span className="text-base font-semibold text-gray-500 pt-1">
+        {'MAX_TOKEN = 150'}
+      </span>
       <div className="flex justify-between items-center pl-1">
         <span className="text-md font-semibold py-2">New Message</span>
         {errorMessage && (
