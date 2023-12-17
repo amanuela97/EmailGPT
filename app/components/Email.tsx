@@ -29,7 +29,7 @@ const Email = () => {
     if (!errorMessage) return;
     setTimeout(() => {
       dispatch(resetErrorMessage());
-    }, 3000);
+    }, 5000);
   }, [dispatch, errorMessage]);
 
   const handleCreate = (value: string, type: string) => {
