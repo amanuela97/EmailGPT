@@ -8,7 +8,11 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const question = searchParams.get('question');
 
-  if (!question || question !== 'string' || JSON.parse(question) !== 'string') {
+  if (
+    !question ||
+    typeof question !== 'string' ||
+    typeof JSON.parse(question) !== 'string'
+  ) {
     return NextResponse.json(
       { error: 'missing required params' },
       { status: 400, statusText: 'Bad Request' }
