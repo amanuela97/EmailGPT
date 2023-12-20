@@ -1,5 +1,4 @@
 'use client';
-
 import Email from './components/Email';
 import Result from './components/Result';
 import { Provider } from 'react-redux';
